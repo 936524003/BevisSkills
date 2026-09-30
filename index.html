@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bevis Skills</title>
+  <style>
+    :root {
+      --bg: #070b12;
+      --ink: #e7f3f8;
+      --muted: #8aa0b2;
+      --line: rgba(126, 214, 255, 0.22);
+      --accent: #7ed6ff;
+      --accent-dim: rgba(126, 214, 255, 0.12);
+      --btn: #123246;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        linear-gradient(rgba(126, 214, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 214, 255, 0.04) 1px, transparent 1px),
+        radial-gradient(900px 420px at 50% -120px, rgba(80, 170, 220, 0.22), transparent 55%),
+        var(--bg);
+      background-size: 28px 28px, 28px 28px, auto, auto;
+    }
+
+    .wrap {
+      width: min(880px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 52px 0 72px;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-family: Consolas, "Cascadia Mono", "Sarasa Mono SC", monospace;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 48px;
+      font-weight: 560;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      text-shadow: 0 0 24px rgba(126, 214, 255, 0.25);
+    }
+
+    .lead {
+      margin: 14px 0 0;
+      max-width: 36em;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .blog {
+      flex: none;
+      margin-top: 6px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    .blog:hover {
+      background: var(--accent-dim);
+      box-shadow: 0 0 18px rgba(126, 214, 255, 0.2);
+    }
+
+    .search {
+      display: block;
+      margin: 34px 0 16px;
+    }
+
+    .search input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(8, 16, 28, 0.72);
+      color: var(--ink);
+      font: inherit;
+      font-family: Consolas, "Cascadia Mono", "Sarasa Mono SC", monospace;
+      font-size: 15px;
+      padding: 12px 14px;
+      outline: none;
+    }
+
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(126, 214, 255, 0.12);
+    }
+
+    .search input::placeholder { color: #6d8496; }
+
+    .card {
+      position: relative;
+      background: rgba(10, 18, 30, 0.86);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 0 0 1px rgba(126, 214, 255, 0.04), 0 20px 50px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+
+    .card::before,
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 1px solid var(--accent);
+      pointer-events: none;
+    }
+
+    .card::before { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+    .card::after { right: 8px; bottom: 8px; border-left: 0; border-top: 0; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 88px 118px auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 22px;
+      border-top: 1px solid rgba(126, 214, 255, 0.1);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .row:first-child { border-top: 0; }
+
+    .name {
+      font-family: Consolas, "Cascadia Mono", "Sarasa Mono SC", monospace;
+      font-size: 15px;
+      word-break: break-all;
+    }
+
+    .name:hover { color: var(--accent); }
+
+    .meta {
+      color: var(--muted);
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-variant-numeric: tabular-nums;
+      font-size: 13px;
+    }
+
+    .download {
+      justify-self: end;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      background: var(--btn);
+      color: var(--accent);
+      font: inherit;
+      font-size: 14px;
+      line-height: 1.2;
+      padding: 7px 16px;
+      text-decoration: none;
+    }
+
+    .download:hover {
+      background: var(--accent);
+      color: #06202c;
+      box-shadow: 0 0 16px rgba(126, 214, 255, 0.35);
+    }
+
+    .empty {
+      padding: 48px 22px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .foot {
+      margin: 14px 4px 0;
+      color: var(--muted);
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .note {
+      margin-top: 28px;
+      color: #6d8496;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 720px) {
+      .wrap { width: min(880px, calc(100% - 28px)); padding-top: 32px; }
+      h1 { font-size: 38px; }
+      .row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .download { justify-self: stretch; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div>
+        <p class="eyebrow">SKILL ARCHIVE</p>
+        <h1>Bevis Skills</h1>
+        <p class="lead">个人 AI Skill 档案。文件放进仓库后，从这里下载。</p>
+      </div>
+      <a class="blog" href="https://www.bevis.wang">博客</a>
+    </header>
+
+    <label class="search">
+      <input id="q" type="search" placeholder="搜索 skill" autocomplete="off">
+    </label>
+
+    <section class="card" id="list"></section>
+    <p class="foot" id="count"></p>
+    <p class="note">把 skill 文件放进仓库的 files 目录并推送，列表会自动更新。</p>
+  </main>
+
+  <script>
+    let files = [];
+
+    const list = document.getElementById("list");
+    const count = document.getElementById("count");
+    const query = document.getElementById("q");
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + " B";
+      const kb = bytes / 1024;
+      if (kb < 1024) return (kb < 10 ? kb.toFixed(1) : Math.round(kb)) + " KB";
+      const mb = kb / 1024;
+      return (mb < 10 ? mb.toFixed(1) : Math.round(mb)) + " MB";
+    }
+
+    function fileHref(name) {
+      return "files/" + name.split("/").map(encodeURIComponent).join("/");
+    }
+
+    function render() {
+      const q = query.value.trim().toLowerCase();
+      const shown = files.filter((file) => file.name.toLowerCase().includes(q));
+      list.replaceChildren();
+
+      if (shown.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = files.length === 0 ? "还没有 skill 文件" : "没有匹配的 skill";
+        list.appendChild(empty);
+        count.textContent = "";
+        return;
+      }
+
+      for (const file of shown) {
+        const href = fileHref(file.name);
+        const row = document.createElement("article");
+        row.className = "row";
+
+        const name = document.createElement("a");
+        name.className = "name";
+        name.href = href;
+        name.download = "";
+        name.textContent = file.name;
+
+        const size = document.createElement("div");
+        size.className = "meta";
+        size.textContent = formatSize(file.bytes);
+
+        const date = document.createElement("div");
+        date.className = "meta";
+        date.textContent = file.date || "";
+
+        const button = document.createElement("a");
+        button.className = "download";
+        button.href = href;
+        button.download = "";
+        button.textContent = "下载";
+
+        row.append(name, size, date, button);
+        list.appendChild(row);
+      }
+
+      count.textContent = "共 " + shown.length + " 个 skill";
+    }
+
+    query.addEventListener("input", render);
+
+    fetch("files.json", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error(String(response.status));
+        return response.json();
+      })
+      .then((data) => {
+        files = Array.isArray(data) ? data : [];
+        render();
+      })
+      .catch(() => {
+        list.replaceChildren();
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = "文件列表暂时读不出来";
+        list.appendChild(empty);
+      });
+  </script>
+</body>
+</html>

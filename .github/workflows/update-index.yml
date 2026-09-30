@@ -1,0 +1,34 @@
+name: Update skill list
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "files/**"
+      - ".github/workflows/update-index.yml"
+      - ".github/scripts/build_index.py"
+
+permissions:
+  contents: write
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild files.json
+        run: python .github/scripts/build_index.py
+
+      - name: Commit the updated list
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add files.json
+          if git diff --staged --quiet; then
+            exit 0
+          fi
+          git commit -m "Update skill file list"
+          git push
