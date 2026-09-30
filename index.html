@@ -60,14 +60,6 @@
       text-shadow: 0 0 24px rgba(126, 214, 255, 0.25);
     }
 
-    .lead {
-      margin: 14px 0 0;
-      max-width: 36em;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.65;
-    }
-
     .blog {
       flex: none;
       margin-top: 6px;
@@ -194,13 +186,6 @@
       letter-spacing: 0.08em;
     }
 
-    .note {
-      margin-top: 28px;
-      color: #6d8496;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
     @media (max-width: 720px) {
       .wrap { width: min(880px, calc(100% - 28px)); padding-top: 32px; }
       h1 { font-size: 38px; }
@@ -218,7 +203,6 @@
       <div>
         <p class="eyebrow">SKILL ARCHIVE</p>
         <h1>Bevis Skills</h1>
-        <p class="lead">个人 AI Skill 档案。文件放进仓库后，从这里下载。</p>
       </div>
       <a class="blog" href="https://www.bevis.wang">博客</a>
     </header>
@@ -229,7 +213,6 @@
 
     <section class="card" id="list"></section>
     <p class="foot" id="count"></p>
-    <p class="note">把 skill 文件放进仓库的 files 目录并推送，列表会自动更新。</p>
   </main>
 
   <script>
